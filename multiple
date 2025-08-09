@@ -1,0 +1,131 @@
+// tailwind.config.ts
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        gold: {
+          100: "#fff9ae",
+          300: "#f8ed62",
+          500: "#e9d700",
+          700: "#dab600",
+          900: "#a98600",
+        },
+      },
+    },
+  },
+  plugins: [],
+};
+
+// app/globals.css
+:root {
+  /* Primary: gold-500 */
+  --primary: 52 100% 46%;
+  --primary-foreground: 0 0% 10%;
+
+  /* Accent: gold-100 */
+  --accent: 54 100% 84%;
+  --accent-foreground: 45 100% 20%;
+
+  /* Ring/focus: deeper gold */
+  --ring: 48 100% 42%;
+}
+
+.dark {
+  --primary: 48 100% 42%;           /* gold-700 */
+  --primary-foreground: 0 0% 98%;
+  --accent: 54 100% 84%;            /* keep light accent for contrast */
+  --accent-foreground: 0 0% 10%;
+  --ring: 48 100% 42%;
+}
+
+// app/page.tsx
+import { Activity } from 'lucide-react';
+import { Badge, Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+export default function Page() {
+  const fetchOps = () => {};
+  const simulateProfit = () => {};
+  const execute = (o) => {};
+  const loading = false;
+  const executing = null;
+  const threshold = 0;
+  const ops = [
+    { id: 1, diffPct: 15, estProfitUsd: 100 },
+    { id: 2, diffPct: 5, estProfitUsd: -50 },
+  ];
+
+  return (
+    <div>
+      <header>
+        <Activity className="h-6 w-6 text-gold-700" />
+      </header>
+      <main>
+        <div>
+          <Button
+            onClick={fetchOps}
+            disabled={loading}
+            variant="default"
+            className="bg-gold-500 hover:bg-gold-700 text-black border border-gold-700"
+          >
+            Refresh
+          </Button>
+          <Button
+            onClick={simulateProfit}
+            variant="secondary"
+            className="border border-gold-700 text-gold-900 hover:bg-gold-100"
+          >
+            Simulate Profit
+          </Button>
+        </div>
+        <div>
+          <Badge variant="secondary" className="ml-auto bg-gold-100 text-gold-900 border border-gold-300">
+            Demo
+          </Badge>
+        </div>
+        <table>
+          <tbody>
+            {ops.map((o) => (
+              <tr
+                key={o.id}
+                className={cn(
+                  o.diffPct >= threshold && o.estProfitUsd > 0 ? "bg-gold-100/50 dark:bg-gold-900/10" : "",
+                )}
+              >
+                <td>
+                  <span
+                    className={cn(
+                      o.diffPct >= threshold ? "text-gold-700 font-semibold" : "text-muted-foreground",
+                    )}
+                  >
+                    {o.diffPct}%
+                  </span>
+                </td>
+                <td>
+                  <span
+                    className={cn(
+                      o.estProfitUsd > 0 ? "text-gold-700 font-semibold" : "text-red-600 font-semibold",
+                    )}
+                  >
+                    ${o.estProfitUsd}
+                  </span>
+                </td>
+                <td>
+                  <Button
+                    size="sm"
+                    variant="default"
+                    disabled={executing === o.id || o.diffPct < threshold}
+                    onClick={() => execute(o)}
+                    className="bg-gold-500 hover:bg-gold-700 text-black border border-gold-700"
+                  >
+                    Execute
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    </div>
+  );
+}
