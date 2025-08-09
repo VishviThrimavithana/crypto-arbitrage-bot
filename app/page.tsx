@@ -123,11 +123,14 @@ export default function Page() {
   }, [auto, topOps, executing])
 
   return (
-    <main className="min-h-screen w-full">
+  <main className="min-h-screen w-full bg-gradient-to-r from-[#0f2027] via-[#2c5364] to-[#00f5a0]">
+
       <div className="mx-auto max-w-7xl p-4 md:p-6">
         <header className="flex items-center gap-3 mb-6">
           <Activity className="h-6 w-6 text-green-600" />
-          <h1 className="text-xl md:text-2xl font-semibold">Multi-Chain Arbitrage Bot</h1>
+          <h1 className="text-xl md:text-2xl font-semibold text-white dark:text-gray-900">
+            Multi-Chain Arbitrage Bot
+          </h1>
           <Badge variant="secondary" className="ml-auto">
             Demo
           </Badge>
