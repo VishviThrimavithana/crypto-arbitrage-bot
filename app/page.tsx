@@ -50,6 +50,8 @@ export default function Page() {
     setLoading(true)
     try {
       const res = await fetch(`/api/opportunities?threshold=${threshold}&sizeQuote=${size}`, { cache: "no-store" })
+      console.log("Fetching opportunities with threshold:", res)
+      // debugger
       const data = await res.json()
       setOps(data.opportunities ?? [])
     } catch (e) {
@@ -122,6 +124,13 @@ export default function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auto, topOps, executing])
 
+   const handleThresholdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value)
+    if (!isNaN(value)) {
+      setThreshold(value)
+    }
+  }
+
   return (
   <main className="min-h-screen w-full bg-gradient-to-r from-[#0f2027] via-[#2c5364] to-[#00f5a0]">
 
@@ -150,12 +159,15 @@ export default function Page() {
                 <Label htmlFor="threshold">Min Diff %</Label>
                 <div className="flex items-center gap-2">
                   <Input
-                    id="threshold"
-                    value={threshold}
-                    onChange={(e) => setThreshold(Number.parseFloat(e.target.value || "0"))}
-                  />
+            id="threshold"
+            type="number"
+            step="0.1"
+            min="0"
+            value={threshold}
+            onChange={handleThresholdChange}
+          />
                   <Button variant="outline" size="icon" onClick={() => setThreshold(0.5)} title="Reset">
-                    <RefreshCw className="h-4 w-4" />
+                   <RefreshCw className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
