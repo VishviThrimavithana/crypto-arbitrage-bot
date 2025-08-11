@@ -119,5 +119,32 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Rajdhani', sans-serif;
   }
 }
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/fonts/Rajdhani/Rajdhani-Regular.woff2') format('woff2'),
+       url('/fonts/Rajdhani/Rajdhani-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/fonts/Rajdhani/Rajdhani-Bold.woff2') format('woff2'),
+       url('/fonts/Rajdhani/Rajdhani-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/fonts/Rajdhani/Rajdhani-Light.woff2') format('woff2'),
+       url('/fonts/Rajdhani/Rajdhani-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
